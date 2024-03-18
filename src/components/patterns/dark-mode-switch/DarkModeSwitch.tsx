@@ -1,21 +1,10 @@
 'use client';
 import { Switch } from '@/components/elements/switch';
-import { css } from '@styled-system/css';
 import { useTheme } from 'next-themes';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { button, container } from './styles';
 
 interface DarkModeSwitchProps {}
-
-const container = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: 2,
-});
-
-const button = css({
-  cursor: 'pointer',
-  fontSize: '1.5rem',
-});
 
 export const DarkModeSwitch = (props: DarkModeSwitchProps) => {
   const { setTheme, theme } = useTheme();
@@ -32,13 +21,13 @@ export const DarkModeSwitch = (props: DarkModeSwitchProps) => {
       >
         ☀
       </button>
-      {isClient && (
-        <Switch
-          id='dark-mode-toggle'
-          checked={theme === 'dark'}
-          onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
-        />
-      )}
+      <Switch
+        id='dark-mode-toggle'
+        checked={isClient && theme === 'dark'}
+        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+        color='pink.700'
+      />
+
       <button className={button} type='button' onClick={() => setTheme('dark')}>
         ☾
       </button>
