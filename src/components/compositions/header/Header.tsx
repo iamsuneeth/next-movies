@@ -1,4 +1,3 @@
-'use client';
 import { DarkModeSwitch } from '@/components/patterns/dark-mode-switch';
 import { header } from './styles';
 import { SiteSearch } from '@/components/patterns/site-search/SiteSearch';

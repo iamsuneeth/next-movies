@@ -1,3 +1,5 @@
+'use client';
+
 import { Avatar } from '@/components/elements/avatar';
 import { Button } from '@/components/elements/button/Button';
 import {
