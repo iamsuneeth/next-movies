@@ -8,5 +8,17 @@ export const header = css({
   gap: 4,
   width: '100%',
   height: '5rem',
-  padding: 4,
+  padding: 2,
+});
+
+export const controlContainer = css({
+  display: 'flex',
+  gap: 4,
+  alignItems: 'center',
+  padding: 2,
+  borderStartRadius: '250px',
+  backgroundColor: {
+    base: 'white/90',
+    _dark: 'black/90',
+  },
 });

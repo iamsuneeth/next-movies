@@ -24,12 +24,13 @@ const rootLayoutRecipe = sva({
     top: {
       gridColumn: '2/-1',
       gridRow: 1,
+      position: 'sticky',
+      top: 0,
     },
     side: {
       gridColumn: '1/2',
       gridRow: '1/-1',
       minWidth: '15rem',
-      height: '100vh',
       position: 'sticky',
       alignSelf: 'start',
       top: 0,
@@ -37,7 +38,7 @@ const rootLayoutRecipe = sva({
     main: {
       gridColumn: '2 / -1',
       gridRow: 2,
-      height: 'calc(100vh - 5rem)',
+      minHeight: 'calc(100vh - 5rem)',
       paddingInline: '2rem',
     },
   },

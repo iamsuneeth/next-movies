@@ -1,12 +1,17 @@
-'use client';
-import { STATIC_MOVIE_CATEGORIES } from '@constants/categories';
-import { css, cva } from '@styled-system/css';
-import { h2 } from '@styled-system/recipes';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link } from '@/components/elements/link';
+import { css } from '@styled-system/css';
+import { h3 } from '@styled-system/recipes';
+import {
+  BarChart4,
+  CircleDotIcon,
+  HeartIcon,
+  LucideIcon,
+  ScrollTextIcon,
+} from 'lucide-react';
+import { ReactNode } from 'react';
 
 type Category = {
-  id: string;
+  id: string | number;
   name: string;
 };
 
@@ -15,23 +20,28 @@ interface NavBarProps {
   genres: Array<Category>;
 }
 
-const linkRecipe = cva({
-  base: {},
-  variants: {
-    type: {
-      active: {
-        color: 'pink.700',
-      },
-      nonActive: {},
-    },
-  },
-  defaultVariants: {
-    type: 'nonActive',
-  },
-});
+interface NavBarIconProps {
+  Icon: LucideIcon;
+  fill?: boolean;
+}
+const NavBarIcon = ({ Icon, fill }: NavBarIconProps) => (
+  <Icon
+    className={css({
+      ...(fill && { fill: 'currentColor' }),
+      stroke: 'currentColor',
+      marginRight: 2,
+    })}
+    size={20}
+  />
+);
 
-export const NavBar = ({ staticCategories }: NavBarProps) => {
-  const pathName = usePathname();
+const staticCategoryIcon: Record<string, ReactNode> = {
+  popular: <NavBarIcon fill Icon={HeartIcon} />,
+  top_rated: <NavBarIcon Icon={BarChart4} />,
+  upcoming: <NavBarIcon Icon={ScrollTextIcon} />,
+};
+
+export const NavBar = ({ staticCategories, genres }: NavBarProps) => {
   return (
     <nav
       className={css({
@@ -39,19 +49,28 @@ export const NavBar = ({ staticCategories }: NavBarProps) => {
         flexDirection: 'column',
       })}
     >
-      <h2 className={h2()}>Discover</h2>
+      <h2 className={h3()}>Discover</h2>
       {staticCategories.map((category) => (
         <Link
           href={{
             pathname: `/category/${category.id}`,
           }}
           key={category.id}
-          className={linkRecipe({
-            type:
-              pathName === `/category/${category.id}` ? 'active' : 'nonActive',
-          })}
         >
+          {staticCategoryIcon[category.id]}
           {category.name}
+        </Link>
+      ))}
+      <h2 className={h3()}>Genres</h2>
+      {genres.map((genre) => (
+        <Link
+          href={{
+            pathname: `/genre/${genre.id}`,
+          }}
+          key={genre.id}
+        >
+          <NavBarIcon Icon={CircleDotIcon} />
+          {genre.name}
         </Link>
       ))}
     </nav>

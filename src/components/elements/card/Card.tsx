@@ -1,3 +1,4 @@
+import { css } from '@styled-system/css';
 import { styled } from '@styled-system/jsx';
 import {
   card,
@@ -14,3 +15,10 @@ export const CardTitle = styled('h3', cardTitle);
 export const CardDescription = styled('p', cardDescription);
 export const CardContent = styled('div', cardContent);
 export const CardFooter = styled('div', cardFooter);
+export const BorderlessCard = styled('div', card.raw(), {
+  defaultProps: {
+    className: css({
+      border: 'none',
+    }),
+  },
+});
