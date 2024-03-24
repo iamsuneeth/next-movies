@@ -3,8 +3,9 @@
 import { Sheet, SheetContent, SheetTrigger } from '@/components/elements/sheet';
 import { css } from '@styled-system/css';
 import { MenuIcon } from 'lucide-react';
-import React from 'react';
+import React, { type MouseEventHandler } from 'react';
 import { useClickAway } from 'react-use';
+import { Link } from '@/components/elements/link';
 
 interface HamburgerMenuProps {
   children: React.ReactNode;
@@ -53,12 +54,14 @@ export const HamburgerMenu = ({ children }: HamburgerMenuProps) => {
   );
 };
 
-export const withHamburgerMenuContext = (
-  Component: React.FC<{ onClick: () => void }> & Record<string, any>,
-) => {
-  const WrapperComponent = (props: React.ComponentProps<typeof Component>) => {
-    const { toggleSheet } = React.useContext(sheetContext);
-    return <Component {...props} onClick={toggleSheet} />;
-  };
-  WrapperComponent.displayName = `withHamburgerMenuContext(${Component.displayName})`;
-};
+export function MenuLink({
+  children,
+  ...props
+}: React.ComponentProps<typeof Link>) {
+  const { toggleSheet } = React.useContext(sheetContext);
+  return (
+    <Link {...props} onClick={toggleSheet}>
+      {children}
+    </Link>
+  );
+}

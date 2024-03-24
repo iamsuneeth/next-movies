@@ -11,11 +11,7 @@ import {
 import { ReactNode } from 'react';
 import { genres } from './fixture';
 import { STATIC_MOVIE_CATEGORIES } from '@/constants/categories';
-
-type Category = {
-  id: string | number;
-  name: string;
-};
+import { MenuLink } from '../hamburger-menu';
 
 interface NavBarProps {}
 
@@ -64,7 +60,7 @@ export const NavBar = async ({}: NavBarProps) => {
     >
       <h2 className={h4()}>Discover</h2>
       {STATIC_MOVIE_CATEGORIES.map((category) => (
-        <Link
+        <MenuLink
           href={{
             pathname: `/category/${category.id}`,
           }}
@@ -72,11 +68,11 @@ export const NavBar = async ({}: NavBarProps) => {
         >
           {staticCategoryIcon[category.id]}
           {category.name}
-        </Link>
+        </MenuLink>
       ))}
       <h2 className={h4()}>Genres</h2>
       {genres.map((genre) => (
-        <Link
+        <MenuLink
           href={{
             pathname: `/genre/${genre.id}`,
           }}
@@ -84,7 +80,7 @@ export const NavBar = async ({}: NavBarProps) => {
         >
           <NavBarIcon Icon={CircleDotIcon} />
           {genre.name}
-        </Link>
+        </MenuLink>
       ))}
     </nav>
   );
