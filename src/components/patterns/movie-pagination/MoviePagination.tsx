@@ -42,14 +42,14 @@ export const MoviePagination = ({
   if (!maxPage) return null;
   const paginationArray = getPaginationArray(page, maxPage);
   return (
-    <Pagination
-      className={css({
-        mdDown: {
-          display: 'none',
-        },
-      })}
-    >
-      <PaginationContent>
+    <Pagination>
+      <PaginationContent
+        className={css({
+          mdDown: {
+            display: 'none',
+          },
+        })}
+      >
         {page > 1 && (
           <>
             <PaginationItem>
@@ -127,6 +127,37 @@ export const MoviePagination = ({
               />
             </PaginationItem>
           </>
+        )}
+      </PaginationContent>
+      <PaginationContent
+        className={css({
+          width: '100%',
+          justifyContent: 'center',
+          md: {
+            display: 'none',
+          },
+        })}
+      >
+        {page > 1 && (
+          <PaginationItem>
+            <PaginationPrevious
+              href={{ pathname, query: { page: page - 1 } }}
+              isActive={false}
+              keepSearch={true}
+            />
+          </PaginationItem>
+        )}
+        {page < maxPage && (
+          <PaginationItem>
+            <PaginationNext
+              href={{
+                pathname,
+                query: { page: page + 1 },
+              }}
+              isActive={false}
+              keepSearch={true}
+            />
+          </PaginationItem>
         )}
       </PaginationContent>
     </Pagination>
