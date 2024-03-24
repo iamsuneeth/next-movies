@@ -20,7 +20,9 @@ export const MovieSort = (props: MovieSortProps) => {
   return (
     <div
       className={css({
-        maxWidth: '20rem',
+        md: {
+          maxWidth: '20rem',
+        },
       })}
     >
       <Select

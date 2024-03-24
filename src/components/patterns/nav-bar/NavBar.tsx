@@ -9,16 +9,15 @@ import {
   ScrollTextIcon,
 } from 'lucide-react';
 import { ReactNode } from 'react';
+import { genres } from './fixture';
+import { STATIC_MOVIE_CATEGORIES } from '@/constants/categories';
 
 type Category = {
   id: string | number;
   name: string;
 };
 
-interface NavBarProps {
-  staticCategories: Array<Category>;
-  genres: Array<Category>;
-}
+interface NavBarProps {}
 
 interface NavBarIconProps {
   Icon: LucideIcon;
@@ -35,13 +34,27 @@ const NavBarIcon = ({ Icon, fill }: NavBarIconProps) => (
   />
 );
 
+async function fetchGenres() {
+  // await setTimeout(2000);
+  return genres;
+  //fetch genres for movies using the movie api
+  const response = await fetch(
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US`,
+  );
+  if (!response.ok) {
+    throw new Error('Failed to fetch category');
+  }
+  const data = await response.json();
+}
+
 const staticCategoryIcon: Record<string, ReactNode> = {
   popular: <NavBarIcon fill Icon={HeartIcon} />,
   top_rated: <NavBarIcon Icon={BarChart4} />,
   upcoming: <NavBarIcon Icon={ScrollTextIcon} />,
 };
 
-export const NavBar = ({ staticCategories, genres }: NavBarProps) => {
+export const NavBar = async ({}: NavBarProps) => {
+  const { genres } = await fetchGenres();
   return (
     <nav
       className={css({
@@ -50,7 +63,7 @@ export const NavBar = ({ staticCategories, genres }: NavBarProps) => {
       })}
     >
       <h2 className={h4()}>Discover</h2>
-      {staticCategories.map((category) => (
+      {STATIC_MOVIE_CATEGORIES.map((category) => (
         <Link
           href={{
             pathname: `/category/${category.id}`,

@@ -9,6 +9,7 @@ export const header = css({
   width: '100%',
   height: '5rem',
   padding: 2,
+  position: 'relative',
   lgDown: {
     gap: 2,
   },

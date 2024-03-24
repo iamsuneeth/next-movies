@@ -12,12 +12,35 @@ import {
 } from '@components/elements/sheet';
 import { MenuIcon } from 'lucide-react';
 import { SideBar } from '../side-bar';
+import { vstack } from '@styled-system/patterns';
+import { HamburgerMenu } from '@/components/patterns/hamburger-menu';
+import { NavBar } from '@/components/patterns/nav-bar';
 
 interface HeaderProps {}
 
 export const Header = (props: HeaderProps) => {
   return (
     <div className={header}>
+      <div
+        className={vstack({
+          borderRadius: '250px',
+          zIndex: 1,
+          padding: 2,
+          position: 'absolute',
+          left: '0.5rem',
+          backgroundColor: {
+            base: 'white/90',
+            _dark: 'black/90',
+          },
+          lg: {
+            display: 'none',
+          },
+        })}
+      >
+        <HamburgerMenu>
+          <NavBar />
+        </HamburgerMenu>
+      </div>
       <div className={controlContainer}>
         <SiteSearch />
         <DarkModeSwitch />

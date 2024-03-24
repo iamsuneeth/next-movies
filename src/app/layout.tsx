@@ -5,6 +5,7 @@ import { ThemeProvider } from './theme-provider';
 import { css, sva } from '@styled-system/css';
 import { Header } from '@/components/compositions/header';
 import { SideBar } from '@/components/compositions/side-bar';
+import { Sticky } from '@/components/elements/sticky';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +25,6 @@ const rootLayoutRecipe = sva({
       },
       display: 'flex',
       flexDirection: 'column',
-      position: 'relative',
     },
     top: {
       gridColumn: '2/-1',
@@ -33,22 +33,25 @@ const rootLayoutRecipe = sva({
       top: 0,
     },
     side: {
-      position: 'fixed',
-      lg: {
-        gridColumn: '1/2',
-        gridRow: '1/-1',
-        minWidth: '15rem',
-        position: 'sticky',
-        alignSelf: 'start',
-        top: 0,
-        left: 0,
+      gridColumn: '1/2',
+      gridRow: '1/-1',
+      minWidth: '15rem',
+
+      alignSelf: 'start',
+      top: 0,
+      left: 0,
+      lgDown: {
+        display: 'none',
       },
     },
     main: {
       gridColumn: '2 / -1',
       gridRow: 2,
       minHeight: 'calc(100vh - 5rem)',
-      paddingInline: '2rem',
+      paddingInline: '1rem',
+      lg: {
+        paddingInline: '2rem',
+      },
     },
   },
 });
@@ -67,9 +70,9 @@ export default function RootLayout({
             <div className={top}>
               <Header />
             </div>
-            <div className={side}>
+            <Sticky offsetTop={0} className={side}>
               <SideBar />
-            </div>
+            </Sticky>
             <div className={main}>{children}</div>
           </div>
         </ThemeProvider>
