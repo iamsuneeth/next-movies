@@ -37,7 +37,7 @@ export const SiteSearch = (props: SiteSearchProps) => {
         }}
       >
         <button type='submit' className={icon} aria-label='Search for a movie'>
-          <Search />
+          <Search size='1em' />
         </button>
         <Input type='search' className={input} />
       </form>

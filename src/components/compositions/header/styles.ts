@@ -9,11 +9,14 @@ export const header = css({
   width: '100%',
   height: '5rem',
   padding: 2,
+  lgDown: {
+    gap: 2,
+  },
 });
 
 export const controlContainer = css({
   display: 'flex',
-  gap: 4,
+  gap: 2,
   alignItems: 'center',
   padding: 2,
   borderStartRadius: '250px',

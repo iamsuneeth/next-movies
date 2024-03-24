@@ -12,8 +12,8 @@ export const siteSearchRecipe = sva({
       backgroundColor: 'pink.700',
       border: '1px solid',
       borderColor: 'pink.500',
-      padding: '1.5rem',
       transition: 'width 0.3s ease',
+      borderRadius: '250px',
     },
     input: {
       backgroundColor: 'transparent',
@@ -27,28 +27,32 @@ export const siteSearchRecipe = sva({
     },
     icon: {
       cursor: 'pointer',
+      fontSize: '1rem',
     },
   },
   variants: {
     state: {
       opened: {
         form: {
-          width: '30rem',
+          paddingLeft: '0.5rem',
+          lg: {
+            width: '20rem',
+            paddingLeft: '1rem',
+          },
+          width: '8rem',
           height: '2rem',
-          borderRadius: '250px',
-          paddingLeft: '1rem',
         },
         icon: {
           pointerEvents: 'auto',
-          marginRight: '0.5rem',
         },
+        input: {},
       },
       closed: {
         form: {
+          cursor: 'pointer',
           width: '2rem',
           height: '2rem',
-          borderRadius: '250px',
-          cursor: 'pointer',
+          padding: '1rem',
         },
         icon: {
           pointerEvents: 'none',

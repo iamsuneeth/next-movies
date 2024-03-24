@@ -2,7 +2,7 @@
 import { Switch } from '@/components/elements/switch';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { button, container } from './styles';
+import { button, container, switchStyle } from './styles';
 
 interface DarkModeSwitchProps {}
 
@@ -26,6 +26,7 @@ export const DarkModeSwitch = (props: DarkModeSwitchProps) => {
         checked={isClient && theme === 'dark'}
         onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
         color='pink.700'
+        className={switchStyle}
       />
 
       <button className={button} type='button' onClick={() => setTheme('dark')}>

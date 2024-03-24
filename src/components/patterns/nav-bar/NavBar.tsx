@@ -1,6 +1,6 @@
 import { Link } from '@/components/elements/link';
 import { css } from '@styled-system/css';
-import { h3 } from '@styled-system/recipes';
+import { h4 } from '@styled-system/recipes';
 import {
   BarChart4,
   CircleDotIcon,
@@ -49,7 +49,7 @@ export const NavBar = ({ staticCategories, genres }: NavBarProps) => {
         flexDirection: 'column',
       })}
     >
-      <h2 className={h3()}>Discover</h2>
+      <h2 className={h4()}>Discover</h2>
       {staticCategories.map((category) => (
         <Link
           href={{
@@ -61,7 +61,7 @@ export const NavBar = ({ staticCategories, genres }: NavBarProps) => {
           {category.name}
         </Link>
       ))}
-      <h2 className={h3()}>Genres</h2>
+      <h2 className={h4()}>Genres</h2>
       {genres.map((genre) => (
         <Link
           href={{

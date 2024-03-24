@@ -5,6 +5,7 @@ import { flex } from '@styled-system/patterns';
 import { Suspense } from 'react';
 import { genres } from './fixture';
 import { Discover } from '@/components/fetchers/discover';
+import { MovieSort } from '@/components/patterns/movie-sort';
 
 async function fetchGenres() {
   // await setTimeout(2000);
@@ -23,10 +24,18 @@ type GenrePageProps = {
   params: {
     id: string;
   };
+  searchParams: {
+    page?: number;
+    sort?: string;
+  };
 };
 
-export default async function GenrePage({ params }: GenrePageProps) {
+export default async function GenrePage({
+  params,
+  searchParams,
+}: GenrePageProps) {
   const { id } = params;
+  const { page = 1, sort = 'popularity.desc' } = searchParams;
   const { genres } = await fetchGenres();
   const currentGenre = genres.find((genre) => genre.id === +id);
   if (!currentGenre) {
@@ -38,11 +47,17 @@ export default async function GenrePage({ params }: GenrePageProps) {
       className={flex({
         direction: 'column',
         gap: 4,
+        paddingBottom: 8,
       })}
     >
       <SectionHeader title={currentGenre.name} subTitle='Movie' />
       <Suspense fallback={<MovieListSkeleton />}>
-        <Discover genres={[`${currentGenre.id}`]}>
+        <MovieSort />
+        <Discover
+          genres={[`${currentGenre.id}`]}
+          page={Number(page)}
+          sort={sort}
+        >
           <MovieList />
         </Discover>
       </Suspense>

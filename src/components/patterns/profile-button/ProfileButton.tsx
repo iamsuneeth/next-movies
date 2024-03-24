@@ -6,7 +6,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/elements/dropdown-menu';
@@ -24,7 +23,8 @@ export const ProfileButton = (props: ProfileButtonProps) => {
     <Button
       className={css({
         backgroundColor: 'transparent',
-        width: 10,
+        width: '1.75rem',
+        height: '1.75rem',
       })}
       onClick={() => setLoggedIn(true)}
     >
@@ -35,7 +35,7 @@ export const ProfileButton = (props: ProfileButtonProps) => {
           _hover: { backgroundColor: 'pink.800/20' },
         })}
       >
-        <IconToRender size={24} />
+        <IconToRender />
       </Avatar>
     </Button>
   );

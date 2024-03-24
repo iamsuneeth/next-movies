@@ -17,9 +17,14 @@ const rootLayoutRecipe = sva({
   slots: ['root', 'top', 'side', 'main'],
   base: {
     root: {
-      display: 'grid',
-      gridTemplateColumns: 'auto 1fr',
-      gridTemplateRows: 'auto 1fr',
+      lg: {
+        display: 'grid',
+        gridTemplateColumns: 'auto 1fr',
+        gridTemplateRows: 'auto 1fr',
+      },
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
     },
     top: {
       gridColumn: '2/-1',
@@ -28,12 +33,16 @@ const rootLayoutRecipe = sva({
       top: 0,
     },
     side: {
-      gridColumn: '1/2',
-      gridRow: '1/-1',
-      minWidth: '15rem',
-      position: 'sticky',
-      alignSelf: 'start',
-      top: 0,
+      position: 'fixed',
+      lg: {
+        gridColumn: '1/2',
+        gridRow: '1/-1',
+        minWidth: '15rem',
+        position: 'sticky',
+        alignSelf: 'start',
+        top: 0,
+        left: 0,
+      },
     },
     main: {
       gridColumn: '2 / -1',

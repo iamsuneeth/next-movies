@@ -1,4 +1,3 @@
-'use client';
 import {
   Pagination,
   PaginationContent,
@@ -8,6 +7,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/elements/pagination';
+import { css } from '@styled-system/css';
+import { Rock_3D } from 'next/font/google';
+import { headers } from 'next/headers';
 
 interface MoviePaginationProps {
   page?: number;
@@ -15,52 +17,116 @@ interface MoviePaginationProps {
   url?: string | null;
 }
 
+const MAX_PAGE_TO_SHOW = 10;
+
+function getPaginationArray(page: number, maxPage: number) {
+  if (maxPage <= MAX_PAGE_TO_SHOW || page < MAX_PAGE_TO_SHOW) {
+    return Array.from(
+      { length: Math.min(MAX_PAGE_TO_SHOW, maxPage) },
+      (_, index) => index + 1,
+    );
+  }
+
+  return Array.from(
+    { length: MAX_PAGE_TO_SHOW },
+    (_, index) => page - Math.round(MAX_PAGE_TO_SHOW / 2) + index,
+  ).filter((page) => page <= maxPage);
+}
+
 export const MoviePagination = ({
   page = 1,
   maxPage = 0,
-  url = '',
 }: MoviePaginationProps) => {
+  const headerList = headers();
+  const pathname = headerList.get('x-pathname');
   if (!maxPage) return null;
-  const paginationArray = Array(Math.min(3, maxPage)).fill(0);
+  const paginationArray = getPaginationArray(page, maxPage);
   return (
-    <Pagination>
+    <Pagination
+      className={css({
+        mdDown: {
+          display: 'none',
+        },
+      })}
+    >
       <PaginationContent>
         {page > 1 && (
+          <>
+            <PaginationItem>
+              <PaginationPrevious
+                href={{ pathname, query: { page: page - 1 } }}
+                isActive={false}
+                keepSearch={true}
+              />
+            </PaginationItem>
+
+            {page >= MAX_PAGE_TO_SHOW && (
+              <PaginationItem>
+                <PaginationLink
+                  href={{
+                    pathname,
+                    query: { page: 1 },
+                  }}
+                  keepSearch={true}
+                  isActive={false}
+                >
+                  {1}
+                </PaginationLink>
+              </PaginationItem>
+            )}
+          </>
+        )}
+        {page >= MAX_PAGE_TO_SHOW && (
           <PaginationItem>
-            <PaginationPrevious
-              href={{ pathname: url, query: { page: page - 1 } }}
-              isActive={false}
-            />
+            <PaginationEllipsis />
           </PaginationItem>
         )}
-        {paginationArray.map((_, index) => (
-          <PaginationItem key={index}>
+        {paginationArray.map((value) => (
+          <PaginationItem key={value}>
             <PaginationLink
               href={{
-                pathname: url,
-                query: { page: index + 1 },
+                pathname,
+                query: { page: value },
               }}
-              isActive={index + 1 === page}
+              isActive={value === page}
+              keepSearch={true}
             >
-              {index + 1}
+              {value}
             </PaginationLink>
           </PaginationItem>
         ))}
-        {maxPage > 3 && (
+        {maxPage > MAX_PAGE_TO_SHOW && page < maxPage - MAX_PAGE_TO_SHOW && (
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
         )}
         {page < maxPage && (
-          <PaginationItem>
-            <PaginationNext
-              href={{
-                pathname: url,
-                query: { page: page + 1 },
-              }}
-              isActive={false}
-            />
-          </PaginationItem>
+          <>
+            {page < maxPage - MAX_PAGE_TO_SHOW && (
+              <PaginationItem>
+                <PaginationLink
+                  href={{
+                    pathname,
+                    query: { page: maxPage },
+                  }}
+                  keepSearch={true}
+                  isActive={false}
+                >
+                  {maxPage}
+                </PaginationLink>
+              </PaginationItem>
+            )}
+            <PaginationItem>
+              <PaginationNext
+                href={{
+                  pathname,
+                  query: { page: page + 1 },
+                }}
+                isActive={false}
+                keepSearch={true}
+              />
+            </PaginationItem>
+          </>
         )}
       </PaginationContent>
     </Pagination>

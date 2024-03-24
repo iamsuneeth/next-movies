@@ -5,6 +5,8 @@ import { setTimeout } from 'timers/promises';
 interface DiscoverProps {
   genres: Array<string>;
   children: ReactNode;
+  page: number;
+  sort: string;
 }
 
 async function discoverMovies(
@@ -14,13 +16,27 @@ async function discoverMovies(
   return discoverResponse;
 }
 
-export const Discover = async ({ children, genres }: DiscoverProps) => {
-  const data = await discoverMovies(genres);
+export const Discover = async ({
+  children,
+  genres,
+  sort,
+  page,
+}: DiscoverProps) => {
+  const dataPromise = discoverMovies(genres);
+  const data = await dataPromise;
   return (
     <div>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement<{ data: any }>(child as any, { data });
+          return React.cloneElement<{
+            data: any;
+            page: number;
+            dataPromise: any;
+          }>(child as any, {
+            data,
+            page,
+            dataPromise,
+          });
         }
         return child;
       })}

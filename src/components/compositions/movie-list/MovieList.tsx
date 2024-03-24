@@ -11,8 +11,6 @@ interface MovieListProps {
 }
 
 export const MovieList = async ({ data, page }: MovieListProps) => {
-  const headerList = headers();
-  const pathName = headerList.get('x-pathname');
   return (
     <>
       <MovieListGridContainer>
@@ -31,7 +29,7 @@ export const MovieList = async ({ data, page }: MovieListProps) => {
           </GridItem>
         ))}
       </MovieListGridContainer>
-      <MoviePagination page={page} maxPage={data?.total_pages} url={pathName} />
+      <MoviePagination page={page} maxPage={data?.total_pages} />
     </>
   );
 };

@@ -5,7 +5,9 @@ import { grid } from '@styled-system/patterns';
 export const MovieListGridContainer = styled('div', {
   base: {
     ...grid.raw(),
-    gridTemplateColumns: 'repeat(auto-fit, minmax(15rem, 20rem))',
+    '--grid-item-min-width': '15rem',
+    gridTemplateColumns:
+      'repeat(auto-fit, minmax(var(--grid-item-min-width), 1fr))',
     gap: '1rem',
   },
 });
