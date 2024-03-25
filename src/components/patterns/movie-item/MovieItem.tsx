@@ -8,6 +8,7 @@ import {
 import { Rating } from '@components/elements/rating';
 import { TMDB_IMAGE_BASE_URL } from '@/constants/tmdb';
 import { css } from '@styled-system/css';
+import { Link } from '@/components/elements/link';
 
 function getImageURL({ width, url }: Image) {
   return `${TMDB_IMAGE_BASE_URL}/w${width}${url}`;
@@ -24,31 +25,43 @@ interface MovieItemProps {
   image: Image;
   title: string;
   rating: number;
+  id: number;
 }
 
-export const MovieItem = ({ image, title, rating }: MovieItemProps) => {
+export const MovieItem = ({ id, image, title, rating }: MovieItemProps) => {
   return (
-    <BorderlessCard>
-      <CardHeader
-        className={css({
-          paddingInline: 0,
-        })}
-      >
-        <Image
-          src={getImageURL(image)}
-          alt={title}
-          width={image.width}
-          height={image.height}
-        />
-      </CardHeader>
-      <CardContent
-        className={css({
-          paddingInline: 0,
-        })}
-      >
-        <CardTitle>{title}</CardTitle>
-        <Rating value={rating} />
-      </CardContent>
-    </BorderlessCard>
+    <Link
+      href={`/movie/${id}`}
+      className={css({
+        padding: 0,
+        margin: 0,
+        _hover: {
+          textDecoration: 'none',
+        },
+      })}
+    >
+      <BorderlessCard>
+        <CardHeader
+          className={css({
+            paddingInline: 0,
+          })}
+        >
+          <Image
+            src={getImageURL(image)}
+            alt={title}
+            width={image.width}
+            height={image.height}
+          />
+        </CardHeader>
+        <CardContent
+          className={css({
+            paddingInline: 0,
+          })}
+        >
+          <CardTitle>{title}</CardTitle>
+          <Rating value={rating} />
+        </CardContent>
+      </BorderlessCard>
+    </Link>
   );
 };

@@ -51,8 +51,8 @@ export default async function GenrePage({
       })}
     >
       <SectionHeader title={currentGenre.name} subTitle='Movie' />
+      <MovieSort />
       <Suspense fallback={<MovieListSkeleton />}>
-        <MovieSort />
         <Discover
           genres={[`${currentGenre.id}`]}
           page={Number(page)}

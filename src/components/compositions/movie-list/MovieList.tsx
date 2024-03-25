@@ -17,6 +17,7 @@ export const MovieList = async ({ data, page }: MovieListProps) => {
         {data?.results.map(({ id, title, vote_average, poster_path }) => (
           <GridItem key={id}>
             <MovieItem
+              id={id}
               image={{
                 url: poster_path,
                 alt: title,
