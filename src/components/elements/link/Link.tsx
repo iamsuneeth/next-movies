@@ -105,6 +105,6 @@ export const Link = ({
         }),
         className,
       )}
-    ></NextLink>
+    />
   );
 };

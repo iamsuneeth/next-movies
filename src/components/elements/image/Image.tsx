@@ -1,6 +1,6 @@
 'use client';
 
-import { css } from '@styled-system/css';
+import { css, cx } from '@styled-system/css';
 import NextImage from 'next/image';
 import { useRef } from 'react';
 
@@ -18,7 +18,7 @@ export const Image = (props: React.ComponentProps<typeof NextImage>) => {
       loading='lazy'
       {...props}
       ref={imgRef}
-      className={`${baseClass} ${opacityClass}`}
+      className={cx(baseClass, opacityClass, props.className)}
       onLoad={(_) => imgRef.current?.classList.remove(opacityClass)}
     />
   );

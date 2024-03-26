@@ -1,7 +1,5 @@
 import { NavBar } from '@/components/patterns/nav-bar';
 import { css } from '@styled-system/css';
-import { HamburgerMenu } from '@/components/patterns/hamburger-menu';
-import { vstack } from '@styled-system/patterns';
 
 interface SideBarProps {}
 
@@ -10,7 +8,7 @@ export const SideBar = async (props: SideBarProps) => {
     <div
       className={css({
         height: '100%',
-        lgDown: {
+        xlDown: {
           height: '5rem',
           display: 'flex',
           alignItems: 'center',
@@ -27,10 +25,6 @@ export const SideBar = async (props: SideBarProps) => {
           padding: '2rem',
           borderRight: 'base',
           height: '100%',
-          display: 'none',
-          lg: {
-            display: 'block',
-          },
         })}
       >
         <NavBar />

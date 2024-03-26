@@ -27,10 +27,13 @@ const rootLayoutRecipe = sva({
       flexDirection: 'column',
     },
     top: {
-      gridColumn: '2/-1',
-      gridRow: 1,
-      position: 'sticky',
+      lg: {
+        gridColumn: '2/-1',
+        gridRow: 1,
+      },
       top: 0,
+      position: 'fixed',
+      width: '100%',
     },
     side: {
       gridColumn: '1/2',
@@ -40,7 +43,7 @@ const rootLayoutRecipe = sva({
       alignSelf: 'start',
       top: 0,
       left: 0,
-      lgDown: {
+      xlDown: {
         display: 'none',
       },
     },

@@ -46,6 +46,7 @@ export default function CategoryPage({
         direction: 'column',
         gap: 4,
         paddingBottom: 8,
+        marginTop: '5rem',
       })}
     >
       <SectionHeader {...staticCategory} />

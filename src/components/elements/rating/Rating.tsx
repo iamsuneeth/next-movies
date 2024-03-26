@@ -1,8 +1,9 @@
-import { css, cva } from '@styled-system/css';
+import { css, cva, cx } from '@styled-system/css';
 
 interface RatingProps {
   value: number;
   maxValue?: number;
+  className?: string;
 }
 
 const starRecipe = cva({
@@ -11,6 +12,7 @@ const starRecipe = cva({
     position: 'relative',
     overflow: 'hidden',
     display: 'block',
+    top: '-0.05em',
   },
   variants: {
     type: {
@@ -38,14 +40,17 @@ const starRecipe = cva({
 
 const starArray = Array.from({ length: 5 }, (_, i) => i);
 
-export const Rating = ({ value, maxValue = 10 }: RatingProps) => {
+export const Rating = ({ value, className, maxValue = 10 }: RatingProps) => {
   const [wholeRating, decimalRating] = (value / 2).toFixed(2).split('.');
 
   return (
     <div
-      className={css({
-        display: 'flex',
-      })}
+      className={cx(
+        css({
+          display: 'flex',
+        }),
+        className,
+      )}
     >
       {starArray.map((_, i) => {
         return (
