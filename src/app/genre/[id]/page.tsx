@@ -1,11 +1,16 @@
-import { MovieList } from '@components/compositions/movie-list';
+import { MovieList, MovieListProps } from '@components/compositions/movie-list';
 import { MovieListSkeleton } from '@components/compositions/movie-list/skeleton';
 import { SectionHeader } from '@components/patterns/section-header';
 import { flex } from '@styled-system/patterns';
 import { Suspense } from 'react';
 import { genres } from './fixture';
-import { Discover } from '@/components/fetchers/discover';
 import { MovieSort } from '@/components/patterns/movie-sort';
+import { withWorkflow } from '@/components/core/workflow';
+import {
+  withGenreList,
+  withGenreListFetcherProps,
+} from '@/data/movie/fetchers';
+import movieListTransformer from '@/data/movie/transformers/movieList';
 
 async function fetchGenres() {
   // await setTimeout(2000);
@@ -42,6 +47,15 @@ export default async function GenrePage({
     return null;
   }
 
+  const MovieListComponent = withWorkflow<
+    withGenreListFetcherProps,
+    MovieListProps
+  >(MovieList, {
+    fetchers: [withGenreList],
+    transformers: [movieListTransformer],
+    fetcherProps: { genre: id, page: Number(page), sort },
+  });
+
   return (
     <div
       className={flex({
@@ -53,14 +67,8 @@ export default async function GenrePage({
     >
       <SectionHeader title={currentGenre.name} subTitle='Movie' />
       <MovieSort />
-      <Suspense fallback={<MovieListSkeleton />}>
-        <Discover
-          genres={[`${currentGenre.id}`]}
-          page={Number(page)}
-          sort={sort}
-        >
-          <MovieList />
-        </Discover>
+      <Suspense fallback={<MovieListSkeleton />} key={`${id}-${page}-${sort}`}>
+        <MovieListComponent page={Number(page)} />
       </Suspense>
     </div>
   );

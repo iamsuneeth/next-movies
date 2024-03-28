@@ -3,6 +3,7 @@
 import { css, cx } from '@styled-system/css';
 import NextImage from 'next/image';
 import { useRef } from 'react';
+import placeholder from '@public/undraw_placeholder.svg';
 
 const baseClass = css({
   transition: 'opacity 0.5s ease-in-out',

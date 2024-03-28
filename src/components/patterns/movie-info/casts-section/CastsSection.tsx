@@ -10,7 +10,6 @@ import { Image } from '@/components/elements/image';
 import { css } from '@styled-system/css';
 import { stack } from '@styled-system/patterns';
 import { setTimeout } from 'timers/promises';
-
 interface CastsSectionProps {}
 
 async function fetchCasts() {
@@ -91,7 +90,12 @@ export const CastsSection = async (props: CastsSectionProps) => {
                   alignItems: 'center',
                 })}
               >
-                <div>
+                <div
+                  className={css({
+                    maxWidth: '185px',
+                    maxHeight: '278px',
+                  })}
+                >
                   <Image
                     alt='actor image'
                     src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}

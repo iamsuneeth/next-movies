@@ -1,5 +1,7 @@
-import { MovieLists } from '@/components/fetchers/movie-lists';
-import { MovieList } from '@components/compositions/movie-list';
+import { withWorkflow } from '@/components/core/workflow';
+import { MovieListFetcherProps, movieListFetcher } from '@/data/movie/fetchers';
+import movieListTransformer from '@/data/movie/transformers/movieList';
+import { MovieList, MovieListProps } from '@components/compositions/movie-list';
 import { MovieListSkeleton } from '@components/compositions/movie-list/skeleton';
 import { SectionHeader } from '@components/patterns/section-header';
 import { flex } from '@styled-system/patterns';
@@ -40,6 +42,15 @@ export default function CategoryPage({
     return null;
   }
 
+  const MovieListComponent = withWorkflow<
+    MovieListFetcherProps,
+    MovieListProps
+  >(MovieList, {
+    fetchers: [movieListFetcher],
+    transformers: [movieListTransformer],
+    fetcherProps: { listName: name, page: Number(page) },
+  });
+
   return (
     <div
       className={flex({
@@ -50,10 +61,8 @@ export default function CategoryPage({
       })}
     >
       <SectionHeader {...staticCategory} />
-      <Suspense fallback={<MovieListSkeleton />}>
-        <MovieLists category={name} page={Number(page)}>
-          <MovieList />
-        </MovieLists>
+      <Suspense fallback={<MovieListSkeleton />} key={`${name}-${page}`}>
+        <MovieListComponent page={Number(page)} />
       </Suspense>
     </div>
   );

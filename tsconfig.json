@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "target": "ES2020",
     "plugins": [
       {
         "name": "next"
@@ -23,6 +24,7 @@
       "@components/*":["./src/components/*"],
       "@styled-system/*":["./styled-system/*"],
       "@constants/*":["./src/constants/*"],
+      "@types/tmdb": ["./types/tmdb"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

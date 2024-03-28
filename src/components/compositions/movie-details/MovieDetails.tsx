@@ -3,15 +3,16 @@ import { css } from '@styled-system/css';
 import { movieDetails } from './fixture';
 import { MovieInfo } from '@/components/patterns/movie-info';
 import { ImageSection } from './image-section';
+import { movieDetailsTransformerResponse } from '@/data/movie/transformers';
 
-async function fetchDetails() {
-  return movieDetails;
+interface MovieDetailsProps {
+  data: {
+    movieDetails: movieDetailsTransformerResponse;
+  };
 }
 
-interface MovieDetailsProps {}
-
-export const MovieDetails = async (props: MovieDetailsProps) => {
-  const movieDetails = await fetchDetails();
+export const MovieDetails = (props: MovieDetailsProps) => {
+  const movieDetails = props.data.movieDetails;
   return (
     <div
       className={css({
