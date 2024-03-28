@@ -37,7 +37,8 @@ export interface MovieDetails extends Omit<Movie, 'genre_ids'> {
   videos: VideoList;
 }
 
-interface Credits {
+export interface Credits {
+  id: number;
   cast: Cast[];
   crew: Crew[];
 }
@@ -109,4 +110,8 @@ interface Video {
   type: string;
   official: boolean;
   id: string;
+}
+
+export interface GenreList {
+  genres: Genre[];
 }

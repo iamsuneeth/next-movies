@@ -16,8 +16,8 @@ export const ImageSection = ({ url }: ImageSectionProps) => {
       })}
     >
       <Image
-        src={`https://image.tmdb.org/t/p/w780/${url}`}
-        alt={'sdsd'}
+        src={`https://image.tmdb.org/t/p/w1280/${url}`}
+        alt={'movie poster'}
         width={780}
         height={1170}
         className={css({

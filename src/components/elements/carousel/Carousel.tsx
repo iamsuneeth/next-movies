@@ -15,7 +15,7 @@ const carouselDefaultProps = {
 
 export const Carousel = (props: CarouselProps) => {
   return (
-    <Slider {...carouselDefaultProps} {...props}>
+    <Slider {...carouselDefaultProps} {...props} useTransform={false}>
       {React.Children.map(props.children, (child) => (
         <div>{child}</div>
       ))}

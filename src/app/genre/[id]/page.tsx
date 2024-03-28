@@ -3,27 +3,14 @@ import { MovieListSkeleton } from '@components/compositions/movie-list/skeleton'
 import { SectionHeader } from '@components/patterns/section-header';
 import { flex } from '@styled-system/patterns';
 import { Suspense } from 'react';
-import { genres } from './fixture';
 import { MovieSort } from '@/components/patterns/movie-sort';
 import { withWorkflow } from '@/components/core/workflow';
 import {
   withGenreList,
   withGenreListFetcherProps,
 } from '@/data/movie/fetchers';
-import movieListTransformer from '@/data/movie/transformers/movieList';
-
-async function fetchGenres() {
-  // await setTimeout(2000);
-  return genres;
-  //fetch genres for movies using the movie api
-  const response = await fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US`,
-  );
-  if (!response.ok) {
-    throw new Error('Failed to fetch category');
-  }
-  const data = await response.json();
-}
+import { tmdbService } from '@/services/tmdb';
+import { genreMovieListTransformer } from '@/data/movie/transformers';
 
 type GenrePageProps = {
   params: {
@@ -41,7 +28,7 @@ export default async function GenrePage({
 }: GenrePageProps) {
   const { id } = params;
   const { page = 1, sort = 'popularity.desc' } = searchParams;
-  const { genres } = await fetchGenres();
+  const { genres } = await tmdbService.getGenres();
   const currentGenre = genres.find((genre) => genre.id === +id);
   if (!currentGenre) {
     return null;
@@ -52,7 +39,7 @@ export default async function GenrePage({
     MovieListProps
   >(MovieList, {
     fetchers: [withGenreList],
-    transformers: [movieListTransformer],
+    transformers: [genreMovieListTransformer],
     fetcherProps: { genre: id, page: Number(page), sort },
   });
 

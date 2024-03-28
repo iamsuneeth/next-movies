@@ -1,7 +1,10 @@
 import { TMDB_API_BASE_URL } from '@/constants/tmdb';
+import { GenreList } from '@/types/tmdb';
+import { unstable_cache } from 'next/cache';
 
 class TMDBService {
   #base_fetch_options: RequestInit;
+  getGenres: () => Promise<GenreList>;
   constructor() {
     this.#base_fetch_options = {
       method: 'GET',
@@ -10,6 +13,14 @@ class TMDBService {
         Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
       },
     };
+
+    this.getGenres = unstable_cache(
+      () =>
+        this.fetch('genre/movie/list', {
+          messageOnError: 'Failed to fetch genres',
+        }),
+      ['genres'],
+    );
   }
 
   #constructURL(url: string, query?: Record<string, string>) {

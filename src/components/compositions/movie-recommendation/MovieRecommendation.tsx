@@ -1,4 +1,3 @@
-import { Recommendation } from '@/components/fetchers/recommendation';
 import { SectionHeader } from '@/components/patterns/section-header';
 import { Suspense } from 'react';
 import { MovieListSkeleton } from '../movie-list/skeleton';
@@ -15,7 +14,10 @@ interface MovieRecommendationProps {
   page?: number;
 }
 
-export const MovieRecommendation = ({ id, page }: MovieRecommendationProps) => {
+export const MovieRecommendation = ({
+  id,
+  page = 1,
+}: MovieRecommendationProps) => {
   const MovieListComponent = withWorkflow<
     movieRecommendationsFetcherProps,
     MovieListProps

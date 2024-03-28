@@ -17,7 +17,7 @@ export const ImageSection = ({ url }: ImageSectionProps) => {
       })}
     >
       <Image
-        src={`https://image.tmdb.org/t/p/w780/${url}`}
+        src={`https://image.tmdb.org/t/p/w1280/${url}`}
         alt={'sdsd'}
         width={1170}
         height={780}

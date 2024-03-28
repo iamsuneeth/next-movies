@@ -1,5 +1,4 @@
 import { Carousel } from '@/components/elements/carousel';
-import { credits } from './fixture';
 import {
   BorderlessCard,
   Card,
@@ -9,16 +8,15 @@ import {
 import { Image } from '@/components/elements/image';
 import { css } from '@styled-system/css';
 import { stack } from '@styled-system/patterns';
-import { setTimeout } from 'timers/promises';
-interface CastsSectionProps {}
-
-async function fetchCasts() {
-  await setTimeout(1000);
-  return credits.cast;
+import { creditTransformerResponse } from '@/data/movie/transformers';
+export interface CastsSectionProps {
+  data: {
+    credits: creditTransformerResponse;
+  };
 }
 
-export const CastsSection = async (props: CastsSectionProps) => {
-  const casts = await fetchCasts();
+export const CastsSection = ({ data }: CastsSectionProps) => {
+  const casts = data.credits.cast;
   return (
     <div className={stack()}>
       <h4
@@ -90,19 +88,17 @@ export const CastsSection = async (props: CastsSectionProps) => {
                   alignItems: 'center',
                 })}
               >
-                <div
+                <Image
+                  alt='actor image'
+                  src={cast.profile_path}
+                  width={185}
+                  height={278}
                   className={css({
-                    maxWidth: '185px',
-                    maxHeight: '278px',
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
                   })}
-                >
-                  <Image
-                    alt='actor image'
-                    src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}
-                    width={185}
-                    height={278}
-                  />
-                </div>
+                />
               </CardHeader>
               <CardContent
                 className={css({

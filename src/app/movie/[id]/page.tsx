@@ -1,16 +1,10 @@
 import { MovieDetails } from '@/components/compositions/movie-details';
-import { MovieList } from '@/components/compositions/movie-list';
-import { MovieListSkeleton } from '@/components/compositions/movie-list/skeleton';
 import { MovieRecommendation } from '@/components/compositions/movie-recommendation';
 import { withWorkflow } from '@/components/core/workflow';
-import { Recommendation } from '@/components/fetchers/recommendation';
-import { SectionHeader } from '@/components/patterns/section-header';
 import { movieDetailsFetcher } from '@/data/movie/fetchers';
 import { movieDetailsTransformer } from '@/data/movie/transformers';
 import { css } from '@styled-system/css';
-import { Spacer } from '@styled-system/jsx';
 import { flex } from '@styled-system/patterns';
-import { Suspense } from 'react';
 
 interface MoviePageProps {
   params: {
