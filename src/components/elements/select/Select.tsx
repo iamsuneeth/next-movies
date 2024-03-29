@@ -30,7 +30,9 @@ const Content = React.forwardRef<
 >(({ children, position = 'popper', ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
-      ref={ref}
+      ref={(ref) =>
+        ref?.addEventListener('touchend', (e) => e.preventDefault())
+      }
       position={position}
       data-position={position}
       {...props}

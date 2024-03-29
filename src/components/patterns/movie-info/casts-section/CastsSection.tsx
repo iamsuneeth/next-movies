@@ -9,6 +9,7 @@ import { css } from '@styled-system/css';
 import { stack } from '@styled-system/patterns';
 import { creditTransformerResponse } from '@/data/movie/transformers';
 import { Link } from '@/components/elements/link';
+import { AspectRatio } from '@/components/elements/aspect-ratio';
 export interface CastsSectionProps {
   data: {
     credits: creditTransformerResponse;
