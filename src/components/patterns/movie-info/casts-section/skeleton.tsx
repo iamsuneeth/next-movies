@@ -86,12 +86,16 @@ export const CastSkeleton = () => {
                   className={css({
                     padding: 0,
                     alignItems: 'center',
+                    height: '180px',
+                    width: '120px',
+                    margin: '0 auto',
+                    marginBottom: '1rem',
                   })}
                 >
                   <div>
                     <Skeleton
-                      width={'10vw'}
-                      height={'14vw'}
+                      width={'120px'}
+                      height={'180px'}
                       baseColor={token('colors.skeleton.base')}
                       highlightColor={token('colors.skeleton.highlight')}
                     />
@@ -103,11 +107,6 @@ export const CastSkeleton = () => {
                     textAlign: 'center',
                   })}
                 >
-                  <Skeleton
-                    count={1}
-                    baseColor={token('colors.skeleton.base')}
-                    highlightColor={token('colors.skeleton.highlight')}
-                  />
                   <Skeleton
                     count={2}
                     baseColor={token('colors.skeleton.base')}

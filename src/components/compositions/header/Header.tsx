@@ -6,6 +6,7 @@ import { vstack } from '@styled-system/patterns';
 import { HamburgerMenu } from '@/components/patterns/hamburger-menu';
 import { NavBar } from '@/components/patterns/nav-bar';
 import { Image } from '@/components/elements/image';
+import { css } from '@styled-system/css';
 
 interface HeaderProps {}
 
@@ -23,7 +24,7 @@ export const Header = (props: HeaderProps) => {
             base: 'white/90',
             _dark: 'black/90',
           },
-          lg: {
+          xl: {
             display: 'none',
           },
         })}
@@ -32,7 +33,13 @@ export const Header = (props: HeaderProps) => {
           <NavBar />
         </HamburgerMenu>
       </div>
-      <div>
+      <div
+        className={css({
+          xl: {
+            display: 'none',
+          },
+        })}
+      >
         <Image src='/images/logo.svg' width={64} height={64} alt='logo' />
       </div>
       <div className={controlContainer}>
