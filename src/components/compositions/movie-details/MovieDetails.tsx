@@ -3,7 +3,6 @@ import { css } from '@styled-system/css';
 import { MovieInfo } from '@/components/patterns/movie-info';
 import { ImageSection } from './image-section';
 import { movieDetailsTransformerResponse } from '@/data/movie/transformers';
-import { CSSProperties } from 'react';
 
 interface MovieDetailsProps {
   data: {

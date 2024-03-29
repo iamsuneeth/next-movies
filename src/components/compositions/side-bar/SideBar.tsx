@@ -1,3 +1,4 @@
+import { Image } from '@/components/elements/image';
 import { NavBar } from '@/components/patterns/nav-bar';
 import { css } from '@styled-system/css';
 
@@ -27,6 +28,14 @@ export const SideBar = async (props: SideBarProps) => {
           height: '100%',
         })}
       >
+        <div
+          className={css({
+            display: 'flex',
+            justifyContent: 'center',
+          })}
+        >
+          <Image src='/images/logo.svg' width={128} height={128} alt='logo' />
+        </div>
         <NavBar />
       </div>
     </div>
