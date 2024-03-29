@@ -12,6 +12,7 @@ export const AspectRatio = ({ width, height, children }: AspectRatioProps) => {
     <div
       className={css({
         aspectRatio: 'var(--aspect-ratio)',
+        overflow: 'hidden',
       })}
       style={
         {

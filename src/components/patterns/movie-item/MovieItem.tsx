@@ -39,6 +39,9 @@ export const MovieItem = ({ id, image, title, rating }: MovieItemProps) => {
         margin: 0,
         _hover: {
           textDecoration: 'none',
+          '& img': {
+            transform: 'scale(1.05)',
+          },
         },
       })}
     >
@@ -58,6 +61,7 @@ export const MovieItem = ({ id, image, title, rating }: MovieItemProps) => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                transition: 'transform 0.3s',
               })}
             />
           </AspectRatio>

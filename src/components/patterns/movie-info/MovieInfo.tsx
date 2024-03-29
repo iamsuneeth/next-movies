@@ -10,10 +10,13 @@ import { Suspense } from 'react';
 import { CastSkeleton } from './casts-section/skeleton';
 import { withWorkflow } from '@/components/core/workflow';
 import { CreditsFetcher, CreditsFetcherProps } from '@/data/movie/fetchers';
-import { creditsTransformer } from '@/data/movie/transformers';
+import {
+  creditsTransformer,
+  movieDetailsTransformerResponse,
+} from '@/data/movie/transformers';
 
 interface MovieInfoProps {
-  movieDetails: any;
+  movieDetails: movieDetailsTransformerResponse;
 }
 
 export const MovieInfo = ({ movieDetails }: MovieInfoProps) => {
@@ -24,15 +27,23 @@ export const MovieInfo = ({ movieDetails }: MovieInfoProps) => {
     fetchers: [CreditsFetcher],
     transformers: [creditsTransformer],
     fetcherProps: {
-      movieId: movieDetails.id,
+      movieId: movieDetails.id.toString(),
     },
   });
 
   return (
     <div className={stack()}>
       <ImageSection url={movieDetails.backdrop_path} />
-      <TitleSection />
-      <BasicsSection />
+      <TitleSection
+        title={movieDetails.title}
+        subTitle={movieDetails.tagline}
+      />
+      <BasicsSection
+        rating={movieDetails.vote_average}
+        runtime={movieDetails.runtime}
+        spoken_languages={movieDetails.spoken_languages}
+        releaseDate={movieDetails.release_date}
+      />
       <GenreSection genres={movieDetails.genres} />
       <OverviewSection overview={movieDetails.overview} />
       <Suspense fallback={<CastSkeleton />}>

@@ -1,7 +1,6 @@
 import { Carousel } from '@/components/elements/carousel';
 import {
   BorderlessCard,
-  Card,
   CardContent,
   CardHeader,
 } from '@/components/elements/card';
@@ -9,6 +8,7 @@ import { Image } from '@/components/elements/image';
 import { css } from '@styled-system/css';
 import { stack } from '@styled-system/patterns';
 import { creditTransformerResponse } from '@/data/movie/transformers';
+import { Link } from '@/components/elements/link';
 export interface CastsSectionProps {
   data: {
     credits: creditTransformerResponse;
@@ -76,52 +76,65 @@ export const CastsSection = ({ data }: CastsSectionProps) => {
           ]}
         >
           {casts.map((cast) => (
-            <BorderlessCard
+            <Link
               key={cast.id}
+              href={`/cast/${cast.id}`}
               className={css({
-                marginInline: '1rem',
+                _hover: {
+                  textDecoration: 'none',
+                  '& img': {
+                    transform: 'scale(1.05)',
+                  },
+                },
               })}
             >
-              <CardHeader
+              <BorderlessCard
                 className={css({
-                  padding: 0,
-                  alignItems: 'center',
+                  marginInline: '1rem',
                 })}
               >
-                <Image
-                  alt='actor image'
-                  src={cast.profile_path}
-                  width={185}
-                  height={278}
+                <CardHeader
                   className={css({
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
-                  })}
-                />
-              </CardHeader>
-              <CardContent
-                className={css({
-                  padding: 0,
-                  textAlign: 'center',
-                })}
-              >
-                <h4
-                  className={css({
-                    fontWeight: 'bold',
+                    padding: 0,
+                    alignItems: 'center',
                   })}
                 >
-                  {cast.name}
-                </h4>
-                <h5
+                  <Image
+                    alt='actor image'
+                    src={cast.profile_path}
+                    width={185}
+                    height={278}
+                    className={css({
+                      objectFit: 'cover',
+                      width: '100%',
+                      height: '100%',
+                      transition: 'transform 0.3s',
+                    })}
+                  />
+                </CardHeader>
+                <CardContent
                   className={css({
-                    lineClamp: 2,
+                    padding: 0,
+                    textAlign: 'center',
                   })}
                 >
-                  {cast.character}
-                </h5>
-              </CardContent>
-            </BorderlessCard>
+                  <h4
+                    className={css({
+                      fontWeight: 'bold',
+                    })}
+                  >
+                    {cast.name}
+                  </h4>
+                  <h5
+                    className={css({
+                      lineClamp: 2,
+                    })}
+                  >
+                    {cast.character}
+                  </h5>
+                </CardContent>
+              </BorderlessCard>
+            </Link>
           ))}
         </Carousel>
       </div>

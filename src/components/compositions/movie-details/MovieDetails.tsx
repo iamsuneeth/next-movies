@@ -1,9 +1,9 @@
 import { css } from '@styled-system/css';
 
-import { movieDetails } from './fixture';
 import { MovieInfo } from '@/components/patterns/movie-info';
 import { ImageSection } from './image-section';
 import { movieDetailsTransformerResponse } from '@/data/movie/transformers';
+import { CSSProperties } from 'react';
 
 interface MovieDetailsProps {
   data: {
@@ -32,7 +32,7 @@ export const MovieDetails = (props: MovieDetailsProps) => {
           },
         })}
       >
-        <ImageSection url={movieDetails.backdrop_path} />
+        <ImageSection url={movieDetails.poster_path} />
         <MovieInfo movieDetails={movieDetails} />
       </div>
     </div>

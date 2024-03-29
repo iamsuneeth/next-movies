@@ -3,3 +3,4 @@ export * from './withGenreList';
 export * from './movieDetails';
 export * from './recommendations';
 export * from './credits';
+export * from './personKnownFor';
