@@ -11,11 +11,12 @@ interface CarouselProps extends React.ComponentProps<typeof Slider> {
 
 const carouselDefaultProps = {
   speed: 500,
+  slidesToShow: 4,
 };
 
 export const Carousel = (props: CarouselProps) => {
   return (
-    <Slider {...carouselDefaultProps} {...props} useTransform={false}>
+    <Slider {...carouselDefaultProps} {...props}>
       {React.Children.map(props.children, (child) => (
         <div>{child}</div>
       ))}

@@ -9,7 +9,6 @@ import { css } from '@styled-system/css';
 import { stack } from '@styled-system/patterns';
 import { creditTransformerResponse } from '@/data/movie/transformers';
 import { Link } from '@/components/elements/link';
-import { AspectRatio } from '@/components/elements/aspect-ratio';
 export interface CastsSectionProps {
   data: {
     credits: creditTransformerResponse;
@@ -35,9 +34,6 @@ export const CastsSection = ({ data }: CastsSectionProps) => {
       >
         <Carousel
           dots={false}
-          initialSlide={0}
-          slidesToShow={4}
-          slidesToScroll={4}
           className={css({
             maxWidth: 'calc(100vw - 2rem - 50px)',
             width: '100%',
@@ -81,6 +77,7 @@ export const CastsSection = ({ data }: CastsSectionProps) => {
               key={cast.id}
               href={`/cast/${cast.id}`}
               className={css({
+                justifyContent: 'center',
                 _hover: {
                   textDecoration: 'none',
                   '& img': {
@@ -98,6 +95,9 @@ export const CastsSection = ({ data }: CastsSectionProps) => {
                   className={css({
                     padding: 0,
                     alignItems: 'center',
+                    height: '180px',
+                    width: '120px',
+                    margin: '0 auto',
                   })}
                 >
                   <Image
