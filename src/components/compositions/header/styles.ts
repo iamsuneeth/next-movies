@@ -13,6 +13,7 @@ export const header = css({
   lgDown: {
     gap: 2,
   },
+  zIndex: 100,
 });
 
 export const controlContainer = css({
