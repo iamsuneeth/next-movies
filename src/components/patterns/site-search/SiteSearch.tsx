@@ -5,11 +5,13 @@ import { useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 import { siteSearchRecipe } from './styles';
 import { Input } from '@/components/elements/input';
+import { useRouter } from 'next/navigation';
 
 interface SiteSearchProps {}
 
 export const SiteSearch = (props: SiteSearchProps) => {
   const [opened, setOpened] = useState(false);
+  const router = useRouter();
   const { container, icon, input, form } = siteSearchRecipe({
     state: opened ? 'opened' : 'closed',
   });
@@ -33,13 +35,19 @@ export const SiteSearch = (props: SiteSearchProps) => {
         onSubmit={(event) => {
           /** use server action here*/
           event.preventDefault();
-          console.log('hit');
+          if (formRef.current) {
+            const formData = new FormData(formRef.current);
+            const search = formData.get('search');
+            if (search) {
+              router.push(`/search?q=${search}`);
+            }
+          }
         }}
       >
         <button type='submit' className={icon} aria-label='Search for a movie'>
           <Search size='1em' />
         </button>
-        <Input type='search' className={input} />
+        <Input name='search' type='search' className={input} />
       </form>
     </div>
   );
