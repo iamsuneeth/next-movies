@@ -1,8 +1,10 @@
 'use client';
 
-import { cva, cx } from '@styled-system/css';
+import { css, cva, cx } from '@styled-system/css';
 import NextLink from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { linkRecipe } from './styles';
+import { button } from '@styled-system/recipes';
 
 function getHref({
   params,
@@ -41,30 +43,6 @@ function getHref({
   }
   return href;
 }
-
-const linkRecipe = cva({
-  base: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingBlock: 2,
-    marginBlock: 1,
-    _hover: {
-      textDecoration: 'underline',
-      textUnderlineOffset: '3px',
-    },
-  },
-  variants: {
-    type: {
-      active: {
-        color: 'pink.700',
-      },
-      nonActive: {},
-    },
-  },
-  defaultVariants: {
-    type: 'nonActive',
-  },
-});
 
 interface LinkProps extends React.ComponentProps<typeof NextLink> {
   isActive?: boolean;
@@ -108,3 +86,21 @@ export const Link = ({
     />
   );
 };
+
+export function ButtonLink(props: LinkProps) {
+  return (
+    <Link
+      className={cx(
+        button({
+          variant: 'outline',
+        }),
+        css({
+          _hover: {
+            textDecoration: 'none',
+          },
+        }),
+      )}
+      {...props}
+    />
+  );
+}

@@ -9,9 +9,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/elements/dropdown-menu';
-import { css } from '@styled-system/css';
 import { CircleUserRound, LogIn } from 'lucide-react';
 import { login, logout } from './actions';
+import { avatar, button } from './styles';
 
 interface ProfileButtonProps {
   isAuthenticated: boolean;
@@ -22,23 +22,13 @@ export const ProfileButton = ({ isAuthenticated }: ProfileButtonProps) => {
   const IconToRender = isAuthenticated ? CircleUserRound : LogIn;
   let ComponentToRender = (
     <Button
-      className={css({
-        backgroundColor: 'transparent',
-        width: '1.75rem',
-        height: '1.75rem',
-      })}
+      className={button}
       onClick={() => {
         const currentUrl = window.location;
         login({ url: `${currentUrl.pathname}${currentUrl.search}` });
       }}
     >
-      <Avatar
-        className={css({
-          alignItems: 'center',
-          justifyContent: 'center',
-          _hover: { backgroundColor: 'pink.800/20' },
-        })}
-      >
+      <Avatar className={avatar}>
         <IconToRender />
       </Avatar>
     </Button>

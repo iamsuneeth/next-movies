@@ -1,27 +1,28 @@
-import { css, cx } from '@styled-system/css';
+import { subTitleRecipe, titleRecipe } from './styles';
 
 interface SectionHeaderProps {
   title: string;
-  subTitle: string;
+  subTitle?: string;
+  as?: React.ElementType;
+  titleType?: 'section-header' | 'title-section' | 'sub-section';
 }
 
-export const SectionHeader = ({ title, subTitle }: SectionHeaderProps) => {
+export const SectionHeader = ({
+  title,
+  subTitle,
+  as: Component = 'div',
+  titleType,
+}: SectionHeaderProps) => {
   return (
-    <div>
-      <h1 className={cx(css({ textTransform: 'uppercase', textStyle: 'h2' }))}>
-        {title}
-      </h1>
+    <Component>
+      <h1 className={titleRecipe({ type: titleType })}>{title}</h1>
       <h2
-        className={css({
-          textTransform: 'uppercase',
-          textStyle: 'sm',
-          fontWeight: 'bold',
-          marginLeft: '1px',
-          color: 'gray.400',
+        className={subTitleRecipe({
+          type: titleType,
         })}
       >
         {subTitle}
       </h2>
-    </div>
+    </Component>
   );
 };

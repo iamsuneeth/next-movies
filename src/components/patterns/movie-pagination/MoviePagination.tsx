@@ -7,9 +7,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/elements/pagination';
-import { css } from '@styled-system/css';
-import { Rock_3D } from 'next/font/google';
 import { headers } from 'next/headers';
+import { paginationContentLarge, paginationContentSmall } from './styles';
 
 interface MoviePaginationProps {
   page?: number;
@@ -43,13 +42,7 @@ export const MoviePagination = ({
   const paginationArray = getPaginationArray(page, maxPage);
   return (
     <Pagination>
-      <PaginationContent
-        className={css({
-          mdDown: {
-            display: 'none',
-          },
-        })}
-      >
+      <PaginationContent className={paginationContentLarge}>
         {page > 1 && (
           <>
             <PaginationItem>
@@ -129,15 +122,7 @@ export const MoviePagination = ({
           </>
         )}
       </PaginationContent>
-      <PaginationContent
-        className={css({
-          width: '100%',
-          justifyContent: 'center',
-          md: {
-            display: 'none',
-          },
-        })}
-      >
+      <PaginationContent className={paginationContentSmall}>
         {page > 1 && (
           <PaginationItem>
             <PaginationPrevious

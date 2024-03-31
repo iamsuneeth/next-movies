@@ -9,9 +9,12 @@ import {
   ScrollTextIcon,
 } from 'lucide-react';
 import { ReactNode } from 'react';
-import { genres } from './fixture';
 import { STATIC_MOVIE_CATEGORIES } from '@/constants/categories';
 import { MenuLink } from '../hamburger-menu';
+import { tmdbService } from '@/services/tmdbv3';
+import { stack } from '@styled-system/patterns';
+import { navBarIconRecipe } from './styles';
+import { GenreList } from '../genre-list';
 
 interface NavBarProps {}
 
@@ -21,27 +24,12 @@ interface NavBarIconProps {
 }
 const NavBarIcon = ({ Icon, fill }: NavBarIconProps) => (
   <Icon
-    className={css({
-      ...(fill && { fill: 'currentColor' }),
-      stroke: 'currentColor',
-      marginRight: 2,
+    className={navBarIconRecipe({
+      type: fill ? 'filled' : undefined,
     })}
     size={20}
   />
 );
-
-async function fetchGenres() {
-  // await setTimeout(2000);
-  return genres;
-  //fetch genres for movies using the movie api
-  const response = await fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US`,
-  );
-  if (!response.ok) {
-    throw new Error('Failed to fetch category');
-  }
-  const data = await response.json();
-}
 
 const staticCategoryIcon: Record<string, ReactNode> = {
   popular: <NavBarIcon fill Icon={HeartIcon} />,
@@ -50,14 +38,9 @@ const staticCategoryIcon: Record<string, ReactNode> = {
 };
 
 export const NavBar = async ({}: NavBarProps) => {
-  const { genres } = await fetchGenres();
+  const { genres } = await tmdbService.getGenres();
   return (
-    <nav
-      className={css({
-        display: 'flex',
-        flexDirection: 'column',
-      })}
-    >
+    <nav className={stack({ gap: 0 })}>
       <h2 className={h4()}>Discover</h2>
       {STATIC_MOVIE_CATEGORIES.map((category) => (
         <MenuLink
@@ -71,17 +54,7 @@ export const NavBar = async ({}: NavBarProps) => {
         </MenuLink>
       ))}
       <h2 className={h4()}>Genres</h2>
-      {genres.map((genre) => (
-        <MenuLink
-          href={{
-            pathname: `/genre/${genre.id}`,
-          }}
-          key={genre.id}
-        >
-          <NavBarIcon Icon={CircleDotIcon} />
-          {genre.name}
-        </MenuLink>
-      ))}
+      <GenreList genres={genres} direction='column' />
     </nav>
   );
 };

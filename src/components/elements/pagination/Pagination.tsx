@@ -5,20 +5,13 @@ import { css, cx } from '@styled-system/css';
 import { ButtonProps } from '@components/elements/button';
 import { Link } from '@components/elements/link';
 import { button } from '@styled-system/recipes';
+import { pagination, paginationContent, paginationEllipsis } from './styles';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
   <nav
     role='navigation'
     aria-label='pagination'
-    className={cx(
-      css({
-        marginInline: 'auto',
-        display: 'flex',
-        width: 'full',
-        justifyContent: 'center',
-      }),
-      className,
-    )}
+    className={cx(pagination, className)}
     {...props}
   />
 );
@@ -28,19 +21,7 @@ const PaginationContent = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<'ul'>
 >(({ className, ...props }, ref) => (
-  <ul
-    ref={ref}
-    className={cx(
-      css({
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 1,
-      }),
-      className,
-    )}
-    {...props}
-  />
+  <ul ref={ref} className={cx(paginationContent, className)} {...props} />
 ));
 PaginationContent.displayName = 'PaginationContent';
 
@@ -135,20 +116,7 @@ const PaginationEllipsis = ({
   className,
   ...props
 }: React.ComponentProps<'span'>) => (
-  <span
-    aria-hidden
-    className={cx(
-      css({
-        display: 'flex',
-        height: 9,
-        width: 9,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }),
-      className,
-    )}
-    {...props}
-  >
+  <span aria-hidden className={cx(paginationEllipsis, className)} {...props}>
     <MoreHorizontal
       className={css({
         height: 4,

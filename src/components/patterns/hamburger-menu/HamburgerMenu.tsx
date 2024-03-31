@@ -1,11 +1,11 @@
 'use client';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/elements/sheet';
-import { css } from '@styled-system/css';
 import { MenuIcon } from 'lucide-react';
 import React, { type MouseEventHandler } from 'react';
 import { useClickAway } from 'react-use';
 import { Link } from '@/components/elements/link';
+import { sheet } from './styles';
 
 interface HamburgerMenuProps {
   children: React.ReactNode;
@@ -32,21 +32,10 @@ export const HamburgerMenu = ({ children }: HamburgerMenuProps) => {
   return (
     <sheetContext.Provider value={{ toggleSheet }}>
       <Sheet side='left' open={sheetOpen}>
-        <SheetTrigger
-          onClick={toggleSheet}
-          className={css({
-            cursor: 'pointer',
-          })}
-        >
+        <SheetTrigger onClick={toggleSheet}>
           <MenuIcon />
         </SheetTrigger>
-        <SheetContent
-          ref={sheetRef}
-          className={css({
-            height: '100vh',
-            overflowY: 'auto',
-          })}
-        >
+        <SheetContent ref={sheetRef} className={sheet}>
           {children}
         </SheetContent>
       </Sheet>

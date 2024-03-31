@@ -6,15 +6,15 @@ import {
   CardTitle,
 } from '@components/elements/card';
 import { Rating } from '@components/elements/rating';
-import { TMDB_IMAGE_BASE_URL } from '@/constants/tmdb';
-import { css } from '@styled-system/css';
 import { Link } from '@/components/elements/link';
-import { CSSProperties } from 'react';
 import { AspectRatio } from '@/components/elements/aspect-ratio';
-
-function getImageURL({ width, url }: Image) {
-  return `${TMDB_IMAGE_BASE_URL}/w${width}${url}`;
-}
+import {
+  movieItemCard,
+  movieItemCardContent,
+  movieItemCardHeader,
+  movieItemImage,
+  movieItemLink,
+} from './styles';
 
 interface Image {
   url: string;
@@ -31,50 +31,27 @@ interface MovieItemProps {
 }
 
 export const MovieItem = ({ id, image, title, rating }: MovieItemProps) => {
-  return (
-    <Link
-      href={`/movie/${id}`}
-      className={css({
-        padding: 0,
-        margin: 0,
-        _hover: {
-          textDecoration: 'none',
-          '& img': {
-            transform: 'scale(1.05)',
-          },
-        },
-      })}
-    >
-      <BorderlessCard className={css({ width: '100%' })}>
-        <CardHeader
-          className={css({
-            paddingInline: 0,
-          })}
-        >
+  const movieLink = (
+    <Link href={`/movie/${id}`} className={movieItemLink}>
+      <BorderlessCard className={movieItemCard}>
+        <CardHeader className={movieItemCardHeader}>
           <AspectRatio width={image.width} height={image.height}>
             <Image
               src={image.url}
               alt={title}
               width={image.width}
               height={image.height}
-              className={css({
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                transition: 'transform 0.3s',
-              })}
+              className={movieItemImage}
             />
           </AspectRatio>
         </CardHeader>
-        <CardContent
-          className={css({
-            paddingInline: 0,
-          })}
-        >
+        <CardContent className={movieItemCardContent}>
           <CardTitle>{title}</CardTitle>
           <Rating value={rating} />
         </CardContent>
       </BorderlessCard>
     </Link>
   );
+
+  return movieLink;
 };

@@ -1,6 +1,7 @@
 import { Rating } from '@/components/elements/rating';
 import { css } from '@styled-system/css';
 import { hstack } from '@styled-system/patterns';
+import { basicSection, infoStyle, ratingStyle } from './styles';
 
 type SpokenLanguages = Array<{
   english_name: string;
@@ -41,24 +42,9 @@ export const BasicsSection = ({
   releaseDate,
 }: BasicsSectionProps) => {
   return (
-    <section
-      className={hstack({
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      })}
-    >
-      <Rating
-        value={rating}
-        className={css({
-          fontSize: '2rem',
-        })}
-      />
-      {/* <span>90 min/english/2024</span> */}
-      <span
-        className={css({
-          textTransform: 'uppercase',
-        })}
-      >
+    <section className={basicSection}>
+      <Rating value={rating} className={ratingStyle} />
+      <span className={infoStyle}>
         {getInfo(runtime, spoken_languages, releaseDate)}
       </span>
     </section>

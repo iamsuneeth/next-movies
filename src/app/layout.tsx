@@ -34,7 +34,7 @@ const rootLayoutRecipe = sva({
       top: 0,
       position: 'fixed',
       width: '100%',
-      zIndex: 100,
+      zIndex: 10,
     },
     side: {
       gridColumn: '1/2',

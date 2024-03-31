@@ -1,37 +1,14 @@
-import { Button } from '@/components/elements/button';
-import { Link } from '@/components/elements/link';
-import { css, cx } from '@styled-system/css';
+import { ButtonLink } from '@/components/elements/link';
 import { hstack } from '@styled-system/patterns';
-import { button } from '@styled-system/recipes';
 import { Link2Icon, PlayIcon } from 'lucide-react';
-import React from 'react';
-import ImdbIcon from '@public/imdb.svg';
-import { Image } from '@/components/elements/image';
 import { IMDBIcon } from '@/components/elements/icons/IMDB';
 import { IMDB_TITLE_URL } from '@/constants/imdb';
+import { YOUTUBE_WATCH_BASE_URL } from '@/constants/youtube';
 
 interface AdditionalInfoSectionProps {
   website?: string;
   imdbId?: string;
   videos: Array<any>;
-}
-
-function ButtonLink(props: React.ComponentProps<typeof Link>) {
-  return (
-    <Link
-      className={cx(
-        button({
-          variant: 'outline',
-        }),
-        css({
-          _hover: {
-            textDecoration: 'none',
-          },
-        }),
-      )}
-      {...props}
-    />
-  );
 }
 
 export const AdditionalInfoSection = ({
@@ -57,7 +34,7 @@ export const AdditionalInfoSection = ({
           </ButtonLink>
         )}
         {trailer && (
-          <ButtonLink href={`https://youtube.com/watch?v=${trailer.key}`}>
+          <ButtonLink href={`${YOUTUBE_WATCH_BASE_URL}${trailer.key}`}>
             <PlayIcon fill={'currentColor'} />
             Trailer
           </ButtonLink>

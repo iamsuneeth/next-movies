@@ -3,16 +3,9 @@
 import * as React from 'react';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { styled } from '@styled-system/jsx';
-import { css, cx } from '@styled-system/css';
+import { cx } from '@styled-system/css';
 import { switchRecipe } from '@styled-system/recipes';
-
-const switchRootOverrides = css({
-  backgroundColor: 'pink.800',
-});
-
-const switchThumbOverrides = css({
-  backgroundColor: 'pink.600',
-});
+import { thumb } from './styles';
 
 const BaseSwitch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitive.Root>,
@@ -22,13 +15,11 @@ const BaseSwitch = React.forwardRef<
 
   return (
     <SwitchPrimitive.Root
-      className={cx('peer', styles.root, switchRootOverrides, className)}
+      className={cx('peer', styles.root, className)}
       {...props}
       ref={ref}
     >
-      <SwitchPrimitive.Thumb
-        className={cx(styles.thumb, switchThumbOverrides)}
-      />
+      <SwitchPrimitive.Thumb className={cx(styles.thumb, thumb)} />
     </SwitchPrimitive.Root>
   );
 });

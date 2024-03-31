@@ -2,18 +2,18 @@ import { stack } from '@styled-system/patterns';
 import { AdditionalInfoSection } from './additional-info-section';
 import { BasicsSection } from './basics-section';
 import { CastsSection, CastsSectionProps } from './casts-section';
-import { GenreSection } from './genre-section';
-import { ImageSection } from './image-section';
-import { OverviewSection } from './overview-section';
-import { TitleSection } from './title-section';
+import { FullBleedImage } from '@components/patterns/fullbleed-image';
+import { Overview } from '@components/patterns/overview';
 import { Suspense } from 'react';
 import { CastSkeleton } from './casts-section/skeleton';
-import { withWorkflow } from '@/components/core/workflow';
+import { withWorkflow } from '@components/core/workflow';
 import { CreditsFetcher, CreditsFetcherProps } from '@/data/movie/fetchers';
 import {
   creditsTransformer,
   movieDetailsTransformerResponse,
 } from '@/data/movie/transformers';
+import { SectionHeader } from '@components/patterns/section-header';
+import { GenreList } from '../genre-list';
 
 interface MovieInfoProps {
   movieDetails: movieDetailsTransformerResponse;
@@ -33,10 +33,12 @@ export const MovieInfo = ({ movieDetails }: MovieInfoProps) => {
 
   return (
     <div className={stack()}>
-      <ImageSection url={movieDetails.backdrop_path} />
-      <TitleSection
+      <FullBleedImage url={movieDetails.backdrop_path} />
+      <SectionHeader
         title={movieDetails.title}
         subTitle={movieDetails.tagline}
+        as='section'
+        titleType='title-section'
       />
       <BasicsSection
         rating={movieDetails.vote_average}
@@ -44,8 +46,8 @@ export const MovieInfo = ({ movieDetails }: MovieInfoProps) => {
         spoken_languages={movieDetails.spoken_languages}
         releaseDate={movieDetails.release_date}
       />
-      <GenreSection genres={movieDetails.genres} />
-      <OverviewSection overview={movieDetails.overview} />
+      <GenreList genres={movieDetails.genres} direction='row' as='section' />
+      <Overview overview={movieDetails.overview} />
       <Suspense fallback={<CastSkeleton />}>
         <CastsSectionComponent />
       </Suspense>

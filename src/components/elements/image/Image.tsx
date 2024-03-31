@@ -3,14 +3,7 @@
 import { css, cx } from '@styled-system/css';
 import NextImage from 'next/image';
 import { useRef } from 'react';
-import placeholder from '@public/undraw_placeholder.svg';
-
-const baseClass = css({
-  transition: 'opacity 0.5s ease-in-out',
-});
-const opacityClass = css({
-  opacity: 0,
-});
+import { baseClass, opacityClass } from './styles';
 
 export const Image = (props: React.ComponentProps<typeof NextImage>) => {
   const imgRef = useRef<HTMLImageElement>(null);

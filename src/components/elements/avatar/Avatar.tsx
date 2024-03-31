@@ -8,7 +8,7 @@ import { avatar } from '@styled-system/recipes';
 const { withProvider, withContext } = createStyleContext(avatar);
 
 export const Avatar = withProvider(styled(AvatarPrimitive.Root), 'root', {
-  color: 'pink.700',
+  color: 'primary',
 });
 export const AvatarImage = withContext(styled(AvatarPrimitive.Image), 'image');
 export const AvatarFallback = withContext(

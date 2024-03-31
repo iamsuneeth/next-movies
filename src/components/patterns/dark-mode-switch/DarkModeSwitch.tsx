@@ -2,7 +2,8 @@
 import { Switch } from '@/components/elements/switch';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { button, container, switchStyle } from './styles';
+import { button, container } from './styles';
+import { MoonIcon, SunIcon } from 'lucide-react';
 
 interface DarkModeSwitchProps {}
 
@@ -19,18 +20,16 @@ export const DarkModeSwitch = (props: DarkModeSwitchProps) => {
         type='button'
         onClick={() => setTheme('light')}
       >
-        ☀
+        <SunIcon />
       </button>
       <Switch
         id='dark-mode-toggle'
         checked={isClient && theme === 'dark'}
         onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
-        color='pink.700'
-        className={switchStyle}
       />
 
       <button className={button} type='button' onClick={() => setTheme('dark')}>
-        ☾
+        <MoonIcon />
       </button>
     </div>
   );

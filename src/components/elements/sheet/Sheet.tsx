@@ -28,6 +28,9 @@ export const Sheet = withProvider(styled(SheetPrimitive.Root), 'root');
 export const SheetTrigger = withContext(
   styled(SheetPrimitive.Trigger),
   'trigger',
+  {
+    cursor: 'pointer',
+  },
 );
 export const SheetClose = withContext(styled(SheetPrimitive.Close), 'close');
 export const SheetPortal = withContext(styled(SheetPrimitive.Portal), 'portal');
