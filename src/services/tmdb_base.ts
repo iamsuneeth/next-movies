@@ -1,30 +1,20 @@
-import { TMDB_API_BASE_URL } from '@/constants/tmdb';
-import { GenreList } from '@/types/tmdb';
-import { unstable_cache } from 'next/cache';
-
-class TMDBService {
+export abstract class TMDBbaseService {
   #base_fetch_options: RequestInit;
-  getGenres: () => Promise<GenreList>;
   constructor() {
     this.#base_fetch_options = {
       method: 'GET',
       headers: {
-        accept: 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',
         Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
       },
     };
-
-    this.getGenres = unstable_cache(
-      () =>
-        this.fetch('genre/movie/list', {
-          messageOnError: 'Failed to fetch genres',
-        }),
-      ['genres'],
-    );
   }
 
+  protected abstract getBaseURL(): string;
+
   #constructURL(url: string, query?: Record<string, string>) {
-    let finalURL = `${TMDB_API_BASE_URL}/${url}`;
+    const baseURL = this.getBaseURL();
+    let finalURL = `${baseURL}/${url}`;
     if (!query || Object.keys(query).length === 0) {
       return finalURL;
     }
@@ -62,5 +52,3 @@ class TMDBService {
     return data;
   }
 }
-
-export const tmdbService = new TMDBService();

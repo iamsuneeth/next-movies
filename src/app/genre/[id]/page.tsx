@@ -9,7 +9,7 @@ import {
   withGenreList,
   withGenreListFetcherProps,
 } from '@/data/movie/fetchers';
-import { tmdbService } from '@/services/tmdb';
+import { tmdbService } from '@/services/tmdbv3';
 import { genreMovieListTransformer } from '@/data/movie/transformers';
 
 type GenrePageProps = {

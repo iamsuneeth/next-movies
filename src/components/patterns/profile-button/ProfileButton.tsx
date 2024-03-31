@@ -10,15 +10,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/elements/dropdown-menu';
 import { css } from '@styled-system/css';
-import { CircleUserRound, LogIn, UserCircle } from 'lucide-react';
-import { useState } from 'react';
+import { CircleUserRound, LogIn } from 'lucide-react';
+import { login, logout } from './actions';
 
-interface ProfileButtonProps {}
+interface ProfileButtonProps {
+  isAuthenticated: boolean;
+}
 
-export const ProfileButton = (props: ProfileButtonProps) => {
+export const ProfileButton = ({ isAuthenticated }: ProfileButtonProps) => {
   //do auth check here
-  const [loggedIn, setLoggedIn] = useState(false);
-  const IconToRender = loggedIn ? CircleUserRound : LogIn;
+  const IconToRender = isAuthenticated ? CircleUserRound : LogIn;
   let ComponentToRender = (
     <Button
       className={css({
@@ -26,7 +27,10 @@ export const ProfileButton = (props: ProfileButtonProps) => {
         width: '1.75rem',
         height: '1.75rem',
       })}
-      onClick={() => setLoggedIn(true)}
+      onClick={() => {
+        const currentUrl = window.location;
+        login({ url: `${currentUrl.pathname}${currentUrl.search}` });
+      }}
     >
       <Avatar
         className={css({
@@ -39,7 +43,7 @@ export const ProfileButton = (props: ProfileButtonProps) => {
       </Avatar>
     </Button>
   );
-  if (loggedIn) {
+  if (isAuthenticated) {
     ComponentToRender = (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>{ComponentToRender}</DropdownMenuTrigger>
@@ -47,9 +51,7 @@ export const ProfileButton = (props: ProfileButtonProps) => {
           <DropdownMenuItem>Create New List</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>My Lists</DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setLoggedIn(false)}>
-            Logout
-          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => logout()}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     );

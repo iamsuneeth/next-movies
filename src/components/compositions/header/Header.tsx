@@ -7,10 +7,12 @@ import { HamburgerMenu } from '@/components/patterns/hamburger-menu';
 import { NavBar } from '@/components/patterns/nav-bar';
 import { Image } from '@/components/elements/image';
 import { css } from '@styled-system/css';
+import { isAuthenticated } from '@/data/utils/auth';
 
 interface HeaderProps {}
 
 export const Header = (props: HeaderProps) => {
+  const authStatus = isAuthenticated();
   return (
     <div className={header}>
       <div
@@ -45,7 +47,7 @@ export const Header = (props: HeaderProps) => {
       <div className={controlContainer}>
         <SiteSearch />
         <DarkModeSwitch />
-        <ProfileButton />
+        <ProfileButton isAuthenticated={authStatus} />
       </div>
     </div>
   );

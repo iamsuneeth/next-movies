@@ -1,5 +1,5 @@
 import { WorkFlowContext } from '@/components/core/workflow';
-import { tmdbService } from '@/services/tmdb';
+import { tmdbService } from '@/services/tmdbv3';
 import type { MovieDetails } from '@/types/tmdb';
 
 export type MovieDetailsProps = {
