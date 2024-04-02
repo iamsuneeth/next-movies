@@ -44,7 +44,7 @@ export const MovieList = async ({ data, page }: MovieListProps) => {
     <>
       <MovieListGridContainer>
         {data.movieList.results?.map(
-          ({ id, title, vote_average, poster_path }) => (
+          ({ id, title, vote_average, poster_path, overview }) => (
             <GridItem key={id}>
               <MovieItem
                 id={id}
