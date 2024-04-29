@@ -1,3 +1,5 @@
+import { MovieList2 } from '@/components/compositions/movie-list/MovieList2';
+import { componentRegistry } from '@/components/core/component-renderer';
 import { withWorkflow } from '@/components/core/workflow';
 import { MovieListFetcherProps, movieListFetcher } from '@/data/movie/fetchers';
 import movieListTransformer from '@/data/movie/transformers/movieList';
@@ -6,6 +8,10 @@ import { MovieListSkeleton } from '@components/compositions/movie-list/skeleton'
 import { SectionHeader } from '@components/patterns/section-header';
 import { flex } from '@styled-system/patterns';
 import { Suspense } from 'react';
+
+async function fetchLayoutConfig(props) {
+  return layout;
+}
 
 const STATIC_CATEGORIES = {
   popular: {
@@ -31,7 +37,7 @@ type CategoryPageProps = {
   };
 };
 
-export default function CategoryPage({
+export default async function CategoryPage({
   params,
   searchParams,
 }: CategoryPageProps) {
@@ -42,28 +48,30 @@ export default function CategoryPage({
     return null;
   }
 
-  const MovieListComponent = withWorkflow<
-    MovieListFetcherProps,
-    MovieListProps
-  >(MovieList, {
-    fetchers: [movieListFetcher],
-    transformers: [movieListTransformer],
-    fetcherProps: { listName: name, page: Number(page) },
-  });
+  const layout = await fetchLayoutConfig({ name, page });
 
-  return (
-    <div
-      className={flex({
-        direction: 'column',
-        gap: 4,
-        paddingBottom: 8,
-        marginTop: '5rem',
-      })}
-    >
-      <SectionHeader {...staticCategory} />
-      <Suspense fallback={<MovieListSkeleton />} key={`${name}-${page}`}>
-        <MovieListComponent page={Number(page)} />
-      </Suspense>
-    </div>
-  );
+  return componentRegistry.render(layout);
 }
+
+const layout = {
+  layout: {
+    componentCategory: 'layout',
+    componentId: 'BasePage',
+    children: [
+      {
+        componentCategory: 'pattern',
+        componentId: 'SectionHeader',
+        props: {
+          title: 'Popular',
+          subTitle: 'movies',
+        },
+      },
+      {
+        componentCategory: 'workflow',
+        componentId: 'MovieListWorkflow',
+        async: true, //enables suspense
+        fallback: 'MovieListSkeleton',
+      },
+    ],
+  },
+};

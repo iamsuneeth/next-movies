@@ -8,6 +8,7 @@ import { Image } from '@/components/elements/image';
 import { vstack } from '@styled-system/patterns';
 import { h1, h2, h3 } from '@styled-system/recipes';
 import { css } from '@styled-system/css';
+import { componentRegistry } from '@/components/core/component-renderer';
 
 export interface MovieListProps {
   data: {
@@ -16,8 +17,8 @@ export interface MovieListProps {
   page?: number;
 }
 
-export const MovieList = async ({ data, page }: MovieListProps) => {
-  if (data.movieList.results.length === 0) {
+export const MovieList = async ({ children }) => {
+  if (children.length === 0) {
     return (
       <div
         className={vstack({
@@ -40,28 +41,5 @@ export const MovieList = async ({ data, page }: MovieListProps) => {
       </div>
     );
   }
-  return (
-    <>
-      <MovieListGridContainer>
-        {data.movieList.results?.map(
-          ({ id, title, vote_average, poster_path, overview }) => (
-            <GridItem key={id}>
-              <MovieItem
-                id={id}
-                image={{
-                  url: poster_path,
-                  alt: title,
-                  width: 342,
-                  height: 513,
-                }}
-                title={title}
-                rating={vote_average}
-              />
-            </GridItem>
-          ),
-        )}
-      </MovieListGridContainer>
-      <MoviePagination page={page} maxPage={data.movieList.total_pages} />
-    </>
-  );
+  return <MovieListGridContainer>{children}</MovieListGridContainer>;
 };

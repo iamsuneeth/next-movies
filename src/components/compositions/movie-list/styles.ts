@@ -13,3 +13,5 @@ export const MovieListGridContainer = styled('div', {
     },
   },
 });
+
+export default MovieListGridContainer;

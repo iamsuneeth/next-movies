@@ -3,6 +3,7 @@ import { css } from '@styled-system/css';
 export const movieItemLink = css({
   padding: 0,
   margin: 0,
+  alignItems: 'start',
   _hover: {
     textDecoration: 'none',
     '& img': {
@@ -26,4 +27,8 @@ export const movieItemImage = css({
   height: '100%',
   objectFit: 'cover',
   transition: 'transform 0.3s',
+});
+
+export const movieItemCardTitle = css({
+  fontSize: '1.2rem',
 });

@@ -12,6 +12,7 @@ import {
   movieItemCard,
   movieItemCardContent,
   movieItemCardHeader,
+  movieItemCardTitle,
   movieItemImage,
   movieItemLink,
 } from './styles';
@@ -55,3 +56,34 @@ export const MovieItem = ({ id, image, title, rating }: MovieItemProps) => {
 
   return movieLink;
 };
+
+function MovieItemLink(props: React.ComponentProps<typeof Link>) {
+  return <Link className={movieItemLink} {...props} />;
+}
+
+function MovieItemHeader(props: React.ComponentProps<typeof CardHeader>) {
+  return <CardHeader className={movieItemCardHeader} {...props} />;
+}
+
+function MovieItemContent(props: React.ComponentProps<typeof CardContent>) {
+  return <CardContent className={movieItemCardContent} {...props} />;
+}
+
+function MovieItemImage(props: React.ComponentProps<typeof Image>) {
+  return <Image className={movieItemImage} {...props} />;
+}
+
+function MovieItemCard(props: React.ComponentProps<typeof BorderlessCard>) {
+  return <BorderlessCard className={movieItemCard} {...props} />;
+}
+
+function MovieItemTitle(props: React.ComponentProps<typeof CardTitle>) {
+  return <CardTitle className={movieItemCardTitle} {...props} />;
+}
+
+MovieItem.Link = MovieItemLink;
+MovieItem.Header = MovieItemHeader;
+MovieItem.Content = MovieItemContent;
+MovieItem.Image = MovieItemImage;
+MovieItem.Card = MovieItemCard;
+MovieItem.Title = MovieItemTitle;

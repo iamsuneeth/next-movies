@@ -148,3 +148,5 @@ export const MoviePagination = ({
     </Pagination>
   );
 };
+
+export default MoviePagination;

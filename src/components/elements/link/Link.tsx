@@ -104,3 +104,5 @@ export function ButtonLink(props: LinkProps) {
     />
   );
 }
+
+export default Link;
